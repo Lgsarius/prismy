@@ -16,15 +16,37 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Menu } from "lucide-react";
+import {
+  Menu,
+  Music2,
+  BarChart2,
+  History,
+  PlayCircle,
+  ListMusic,
+  Sparkles,
+  User,
+  Radio,
+} from "lucide-react";
 import { useState, useCallback } from "react";
 
 const navLinks = [
-  { href: "/top-tracks", label: "Top Tracks" },
-  { href: "/top-artists", label: "Top Artists" },
-  { href: "/recently-played", label: "Recently Played" },
-  { href: "/playlist-generator", label: "Create Playlist" },
-  { href: "/playlist-sorter", label: "My Playlists" },
+  {
+    group: "Insights",
+    items: [
+      { href: "/top-tracks", label: "Top Tracks", icon: Music2 },
+      { href: "/top-artists", label: "Top Artists", icon: User },
+      { href: "/recently-played", label: "Recently Played", icon: History },
+      { href: "/artist-analysis", label: "Artist Analysis", icon: BarChart2 },
+    ],
+  },
+  {
+    group: "Discover",
+    items: [
+      { href: "/discover", label: "Discover Music", icon: Sparkles },
+      { href: "/playlist-generator", label: "Create Playlist", icon: PlayCircle },
+      { href: "/playlist-sorter", label: "My Playlists", icon: ListMusic },
+    ],
+  },
 ];
 
 export function Navbar() {
@@ -51,12 +73,30 @@ export function Navbar() {
   const NavItems = useCallback(
     () => (
       <>
-        {navLinks.map((link) => (
-          <Link key={link.href} href={link.href} onClick={() => setIsOpen(false)}>
-            <Button variant="ghost" className="w-full justify-start">
-              {link.label}
-            </Button>
-          </Link>
+        {navLinks.map((group) => (
+          <div key={group.group} className="space-y-2">
+            <div className="text-xs uppercase tracking-wider text-muted-foreground px-2 hidden md:block">
+              {group.group}
+            </div>
+            {group.items.map((link) => {
+              const Icon = link.icon;
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start gap-2"
+                  >
+                    <Icon className="h-4 w-4" />
+                    {link.label}
+                  </Button>
+                </Link>
+              );
+            })}
+          </div>
         ))}
       </>
     ),
@@ -79,7 +119,22 @@ export function Navbar() {
     <nav className="fixed top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
       <div className="container flex h-16 items-center justify-between max-w-7xl">
         <Link href="/" className="flex items-center space-x-2">
-          <span className="text-xl font-bold">Spotify Tools</span>
+          <svg
+            className="h-6 w-6"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            style={{
+              filter: "drop-shadow(0 0 8px var(--primary))",
+            }}
+          >
+            <path d="M12 2L2 19h20L12 2z" className="text-primary" />
+            <path d="M12 2L8 19h8L12 2z" className="text-primary opacity-50" />
+          </svg>
+          <span className="text-xl font-bold bg-gradient-to-r from-violet-500 via-primary to-indigo-500 bg-clip-text text-transparent">Prismy</span>
         </Link>
 
         {status === "loading" ? (
@@ -87,8 +142,26 @@ export function Navbar() {
         ) : status === "authenticated" ? (
           <>
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-4">
-              <NavItems />
+            <div className="hidden md:flex items-center space-x-8">
+              {navLinks.map((group) => (
+                <div key={group.group} className="flex items-center space-x-4">
+                  {group.items.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <Link key={link.href} href={link.href}>
+                        <Button
+                          variant="ghost"
+                          className="flex items-center gap-2"
+                          size="sm"
+                        >
+                          <Icon className="h-4 w-4" />
+                          {link.label}
+                        </Button>
+                      </Link>
+                    );
+                  })}
+                </div>
+              ))}
               <HoverCard>
                 <HoverCardTrigger>
                   <UserAvatar />
@@ -135,7 +208,7 @@ export function Navbar() {
                       </div>
                     </SheetTitle>
                   </SheetHeader>
-                  <div className="flex flex-col space-y-2 mt-4">
+                  <div className="flex flex-col space-y-6 mt-4">
                     <NavItems />
                     <Button
                       variant="outline"
@@ -155,4 +228,4 @@ export function Navbar() {
       </div>
     </nav>
   );
-} 
+}
