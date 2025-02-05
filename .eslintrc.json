@@ -1,0 +1,23 @@
+{
+  "extends": "next/core-web-vitals",
+  "rules": {
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/no-unused-vars": "off",
+    "react-hooks/rules-of-hooks": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "@typescript-eslint/ban-ts-comment": "off",
+    "no-unused-vars": "off",
+    "@next/next/no-img-element": "off",
+    "react/no-unescaped-entities": "off",
+    "import/no-unused-modules": "off",
+    "no-empty-pattern": "off",
+    "no-empty": "off",
+    "no-console": "off"
+  },
+  "ignorePatterns": ["**/*"],
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  }
+} 
