@@ -27,7 +27,7 @@ export function Footer() {
             Contact
           </Link>
           <a
-            href="https://github.com/yourusername/prismy"
+            href="https://github.com/Lgsarius/prismy"
             target="_blank"
             rel="noreferrer"
             className="hover:text-foreground/80 transition-colors"

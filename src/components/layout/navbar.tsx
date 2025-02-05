@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -42,7 +43,6 @@ const navLinks = [
   {
     group: "Discover",
     items: [
-      { href: "/discover", label: "Discover Music", icon: Sparkles },
       { href: "/playlist-generator", label: "Create Playlist", icon: PlayCircle },
       { href: "/playlist-sorter", label: "My Playlists", icon: ListMusic },
     ],
@@ -119,21 +119,13 @@ export function Navbar() {
     <nav className="fixed top-0 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
       <div className="container flex h-16 items-center justify-between max-w-7xl">
         <Link href="/" className="flex items-center space-x-2">
-          <svg
-            className="h-6 w-6"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            style={{
-              filter: "drop-shadow(0 0 8px var(--primary))",
-            }}
-          >
-            <path d="M12 2L2 19h20L12 2z" className="text-primary" />
-            <path d="M12 2L8 19h8L12 2z" className="text-primary opacity-50" />
-          </svg>
+          <Image
+            src="/logo.png"
+            alt="Prismy Logo"
+            width={32}
+            height={32}
+            className="object-contain"
+          />
           <span className="text-xl font-bold bg-gradient-to-r from-violet-500 via-primary to-indigo-500 bg-clip-text text-transparent">Prismy</span>
         </Link>
 

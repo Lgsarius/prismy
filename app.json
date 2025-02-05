@@ -1,0 +1,42 @@
+{
+  "name": "Prismy",
+  "description": "Your personalized music analytics platform",
+  "keywords": [
+    "spotify",
+    "music",
+    "analytics",
+    "nextjs",
+    "react"
+  ],
+  "website": "https://prismy.app/",
+  "repository": "https://github.com/yourusername/prismy",
+  "env": {
+    "SPOTIFY_CLIENT_ID": {
+      "description": "Your Spotify Client ID from the Spotify Developer Dashboard",
+      "required": true
+    },
+    "SPOTIFY_CLIENT_SECRET": {
+      "description": "Your Spotify Client Secret from the Spotify Developer Dashboard",
+      "required": true
+    },
+    "NEXTAUTH_SECRET": {
+      "description": "A secret key for NextAuth.js",
+      "generator": "secret"
+    },
+    "NEXTAUTH_URL": {
+      "description": "The full URL of your application",
+      "required": true
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ],
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "eco"
+    }
+  }
+} 
